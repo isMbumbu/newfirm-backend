@@ -1,19 +1,12 @@
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
 
-// Sequelize instance for connecting to PostgreSQL
-const sequelize = new Sequelize({
+const { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT } = process.env;
+
+const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
+  host: DB_HOST,
+  port: DB_PORT,
   dialect: 'postgres',
-  host: process.env.DB_HOST,
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false
-    }
-  }
 });
 
 
