@@ -13,6 +13,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 
+
 const User = require('./models/User');
 
 // Test the connection
@@ -28,7 +29,7 @@ const User = require('./models/User');
 
 
 const app = express();
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 5000; // Use Render's dynamic port or fallback to 5000 for local dev
 
 // Ensure the 'uploads' directory exists
 const uploadDir = path.join(__dirname, 'uploads');

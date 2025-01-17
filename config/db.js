@@ -2,16 +2,17 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 
 // Sequelize instance for connecting to PostgreSQL
-const sequelize = new Sequelize(
-  process.env.DB_NAME,    // Database name (e.g., lawconnect)
-  process.env.DB_USER,    // Database user (e.g., lawconnect_user)
-  process.env.DB_PASSWORD, // Database password (e.g., password123)
-  {
-    host: process.env.DB_HOST,  // Database host (e.g., localhost)
-    dialect: 'postgres',        // Using PostgreSQL as the dialect
-    logging: false,             // Disable logging of SQL queries
-  }
-);
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+  host: process.env.DB_HOST,
+  dialect: 'postgres',
+  dialectOptions: {
+    ssl: {
+      require: true,  // Enable SSL for Render-hosted DB
+      rejectUnauthorized: false,  // Disable certificate validation if necessary
+    },
+  },
+});
+
 
 // Function to connect to the database
 async function connectDB() {
